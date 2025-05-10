@@ -7,7 +7,8 @@ import openai
 app = Flask(__name__)
 
 # Load and prepare data
-df = pd.read_csv("jordan_transactions.csv", sep="\t", header=None)
+EXCEL_PATH = os.environ.get("EXCEL_PATH", "jordan_transactions.csv")
+df = pd.read_csv(EXCEL_PATH, sep="\t", header=None)
 df.columns = ["ID", "Mall", "Branch", "Date", "Quantity", "Price", "Type", "Status"]
 rows = df.apply(lambda row: " | ".join(row.astype(str)), axis=1).tolist()
 
